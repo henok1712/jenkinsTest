@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+	xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<munit:config name="users_management-test-suite.xml" />
+	<munit:test name="users_management-test-suite-get:\users:users_management-configTest" doc:id="fc00633f-ca32-4b02-b893-c58aac906e74" description="Test">
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="085931af-cf90-421f-89d4-f2eb57251482" cloneOriginalEvent="true"/>
+			<flow-ref doc:name="Flow-ref to get:\users:users_management-config" doc:id="e1d95905-b97d-4a3e-9841-fba9d209349e" name="get:\users:users_management-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="19941059-c14c-470e-a31d-92de253e0f5f" is="#[MunitTools::notNullValue()]" expression="#[payload]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="users_management-test-suite-get:\users\(id):users_management-configTest" doc:id="885ff94d-bf78-49ce-b401-75e75f3d432e" description="Test">
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="1b39f0e4-290a-4aa6-99d6-7cc2d54b4613" cloneOriginalEvent="true">
+				<munit:attributes value="#[{uriParams:{id: 115}}]" encoding="UTF-8" mediaType="application/java" />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to get:\users\(id):users_management-config" doc:id="6e3401f3-ce07-4bc0-9885-d72b83d2015d" name="get:\users\(id):users_management-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="1557e6ee-d600-4296-9323-e774555ef792" is="#[MunitTools::notNullValue()]" expression="#[payload]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="users_management-test-suite-post:\users:application\json:users_management-configTest" doc:id="86b100ba-03c1-47e7-9075-d2611439b90a" description="Test">
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="b8bf92d1-cb0b-4789-bb1e-d78cc772057e" >
+				<munit:payload value='{
+        
+        "first": "Adama",
+        "last": "Bobb",
+        "department": "IIB"
+}' encoding="UTF-8" mediaType="application/json" />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to post:\users:application\json:users_management-config" doc:id="e569ba30-cd49-4eba-87a3-a4ae935e421f" name="post:\users:application\json:users_management-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="367abf22-9ff9-4be2-b0f1-af2f35202152" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="users_management-test-suite-put:\users:application\json:users_management-configTest" doc:id="1658ae3c-a9e4-4021-b6b4-5b61a9b65933" description="Test">
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="aa7881ac-ff98-4ac9-82d2-b0faee1f5b3a" >
+				<munit:payload value='{
+        "id": 1,
+        "first": "Adam",
+        "last": "Bob",
+        "department": "IIB"
+}' encoding="UTF-8" mediaType="application/json" />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to put:\users\:application\json:users_management-config" doc:id="73cd8383-56ff-44a6-a176-efc30528c8f3" name="put:\users:application\json:users_management-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="991675a5-b1e7-4c5e-975f-9990e5c2c5ea" is="#[MunitTools::notNullValue()]" expression="#[payload]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="users_management-test-suite-delete:\users\(id):users_management-configTest" doc:id="29061bcf-ecc6-4223-a211-6770ca8b6234" description="Test">
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="cce7ab66-4195-4f34-bb5f-da56554bae86" >
+				<munit:attributes value="#[{uriParams:{id: 275}}]" encoding="UTF-8" mediaType="application/java" />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to delete:\users\(id):users_management-config" doc:id="7a6a7d2e-244f-437e-9db4-9a8eb3cc5e32" name="delete:\users\(id):users_management-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="6b768c42-2982-45ce-8fc3-937429cf143d" is="#[MunitTools::notNullValue()]" expression="#[payload]"/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>

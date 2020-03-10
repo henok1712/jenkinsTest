@@ -1,0 +1,12 @@
+{
+  "sampleData": {
+    "afcc324f-c3e2-48d7-96a3-b18c9cd4bdd2": {},
+    "de01c050-5bc9-4c80-9f6b-80dd1db17813": {},
+    "7ddf31b8-3fd6-43bd-b87d-0fa4558d76db": {
+      "payload": "sample_data/soapoutputpayload.dwl"
+    },
+    "e527ef06-2e89-46b7-8416-d8d359a6f011": {
+      "payload": "sample_data/list_json_1.json"
+    }
+  }
+}

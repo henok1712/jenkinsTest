@@ -1,0 +1,100 @@
+#%RAML 1.0
+title: users-management
+version: v1
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/4aa4da8a-b951-4697-8e75-f7ee5afad111/ # baseUri:
+/users:
+  get:
+    description: "get all users information"
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              [
+    {
+        "id": 1,
+        "first": "Adam",
+        "last": "Bob",
+        "department": "IIB"
+    }]
+      404:
+        body:
+          application/json:
+            example: {message:"users not found"}
+              
+        
+            
+  post:
+    body:
+      application/json:
+        example:
+          {
+        "first": "Adam",
+        "last": "Bob",
+        "department": "IIB"
+ }
+    responses:
+      201:
+        body:
+          application/json:
+            example: {message: "user successfully created"}
+      404:
+        body:
+          application/json:
+            example: {message:"user can not be created"}
+              
+              
+         
+
+  
+  /{id}:
+    get:
+      description: "find user information"
+      responses:
+        200:
+          body:
+            application/json:
+              example:  
+                     {  
+         "id": 1,
+        "first": "Adam",
+        "last": "Bob",
+        "department": "IIB"
+  }  
+        404:
+          body:
+            application/json:
+              example: {message: "user not found"}
+                
+    delete:
+      responses:
+        200:
+          body:
+            application/json:
+              example: {message: "user successfully deleted "}
+        404:
+          body:
+            application/json:
+              example: {message: "user can not be deleted"}
+
+  put:
+   body:
+    application/json:
+      example:
+        {
+              "id": 1,
+              "first": "Adam",
+              "last": "Bob",
+              "department": "IIB"
+        }
+
+   responses:
+     200:
+      body:
+       application/json:
+        example: {message: "user successfully updated"}
+     404:
+      body:
+       application/json:
+        example: {message: "user can not be updated"}
+      

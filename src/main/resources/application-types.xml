@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="string" format="java">
+      <types:shape format="raml"><![CDATA[#%RAML 1.0 DataType
+type: string]]></types:shape>
+    </types:type>
+    <types:type name="json" format="json">
+      <types:shape format="weave" example="getallusers.json"><![CDATA[%dw 2.0
+
+type json = Array<{|  id: Number {"typeId": "int"},   first: String,   last: String,   department: String|}> {"example": "[{\\\"id\\\":1,\\\"first\\\":\\\"Adam\\\",\\\"last\\\":\\\"Bob\\\",\\\"department\\\":\\\"IIB\\\"}]"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="getuser" format="json">
+      <types:shape format="weave" example="getuser.json"><![CDATA[%dw 2.0
+
+type getuser = {|
+  id: Number {"typeId": "int"}, 
+  first: String, 
+  last: String, 
+  department: String
+|} {"example": "{\\\"id\\\":1,\\\"first\\\":\\\"Adam\\\",\\\"last\\\":\\\"Bob\\\",\\\"department\\\":\\\"IIB\\\"}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="create" format="json">
+      <types:shape format="weave" example="create.json"><![CDATA[%dw 2.0
+
+type create = Array<{|  first: String,   last: String,   department: String|}> {"example": "[{\\\"first\\\":\\\"Adam\\\",\\\"last\\\":\\\"Bob\\\",\\\"department\\\":\\\"IIB\\\"}]"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="getusers" format="json">
+      <types:shape format="weave" example="getallusers.json"><![CDATA[%dw 2.0
+
+type getusers = Array<{|  id: Number {"typeId": "int"},   first: String,   last: String,   department: String|}> {"example": "[{\\\"id\\\":1,\\\"first\\\":\\\"Adam\\\",\\\"last\\\":\\\"Bob\\\",\\\"department\\\":\\\"IIB\\\"}]"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="id" format="java">
+      <types:shape format="raml"><![CDATA[#%RAML 1.0 DataType
+type: number]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#44c3336e-07ee-4f24-86f4-b4f0dd7bf1e1">
+    <types:processor-declaration>
+      <types:output-event>
+        <types:message>
+          <types:payload type="getuser"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#232bf462-22d7-4dd8-9578-11c1810ef4d9">
+    <types:processor-declaration>
+      <types:output-event>
+        <types:message>
+          <types:payload type="json"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#7ddf31b8-3fd6-43bd-b87d-0fa4558d76db">
+    <types:processor-declaration>
+      <types:output-event>
+        <types:message>
+          <types:payload type="getusers"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#e527ef06-2e89-46b7-8416-d8d359a6f011">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="getusers"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#05477b15-9287-4ab9-bbc2-bb723d4d2339">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="getuser"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#2be07683-ebe6-4d47-9aed-2de81dba1437">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="create"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>
